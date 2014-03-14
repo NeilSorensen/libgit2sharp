@@ -106,9 +106,7 @@ namespace LibGit2Sharp.Tests
                 expectedFetchState.CheckUpdatedReferences(repo);
 
                 // Verify the reflog entries
-                //TODO: BUG something is preventing remote reflogs from being updated
-                //var reflogEntry = repo.Refs.Log("refs/remotes/testRemote/master").First();
-                //Assert.Equal("fetch", reflogEntry.Message);
+                Assert.Equal(0, repo.Refs.Log(string.Format("refs/remotes/{0}/master", remoteName)).Count()); // Only tags are retrieved
             }
         }
 
@@ -140,6 +138,10 @@ namespace LibGit2Sharp.Tests
 
                 // Verify the expected
                 expectedFetchState.CheckUpdatedReferences(repo);
+
+                // Verify the reflog entries
+                var reflogEntry = repo.Refs.Log(string.Format("refs/remotes/{0}/{1}", remoteName, localBranchName)).Single();
+                Assert.True(reflogEntry.Message.StartsWith("fetch "));
             }
         }
 
