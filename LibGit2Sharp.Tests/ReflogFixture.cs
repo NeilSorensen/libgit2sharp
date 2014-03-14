@@ -148,7 +148,7 @@ namespace LibGit2Sharp.Tests
         [InlineData(false, true, true)]
         [InlineData(true, true, true)]
         //[InlineData(true, null, false)] // TODO: re-enable these when libgit2 is doing the right thing
-        //[InlineData(true, false, false)]
+        //[InlineData(true, false, false)] // cf. https://github.com/libgit2/libgit2/issues/2186
         //[InlineData(false, false, false)]
         public void AppendingToReflogDependsOnCoreLogAllRefUpdatesSetting(bool isBare, bool? setting, bool expectAppend)
         {
